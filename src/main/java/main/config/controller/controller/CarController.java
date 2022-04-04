@@ -21,9 +21,4 @@ public class CarController {
         model.addAttribute("cars", carList);
         return "cars";
     }
-
-    @GetMapping("/car")
-    public String sayCars() {
-        return "cars";
-    }
 }
