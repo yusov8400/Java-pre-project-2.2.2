@@ -1,8 +1,8 @@
 package main.config.controller.service;
 
+import main.config.controller.config.CarProperties;
 import main.config.controller.model.Car;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -10,12 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@PropertySource("classpath:application.properties")
 public class CarService {
     List<Car> carList;
 
-    @Value("${Car.max}")
-    public int carMax;
+    @Autowired
+    CarProperties carProperties;
 
     @PostConstruct
     public void init() {
@@ -33,7 +32,7 @@ public class CarService {
     }
 
     public List<Car> getCarList(Integer count) {
-        if (count == null || count >= carMax){
+        if (count == null || count >= carProperties.getCarMax()) {
             return carList;
         }
         return carList.subList(0, count);
